@@ -211,8 +211,8 @@ Para subir los cambios al nuevo repositorio, primero nos aseguramos de que estam
 git checkout -B main
 ```
 
-Stageamos todos los cambios, ponemos el mensaje initial project y creamos el primer commit. 
-Sincroniza los cambios para realizar un push y pull.
+Stageamos todos los cambios, ponemos el mensaje `initial project` y creamos el primer `commit`. 
+Sincroniza los cambios para realizar un `push` y `pull`.
 
 Por último, sube los campos al nuevo repositorio con el comando:
 ```sh
