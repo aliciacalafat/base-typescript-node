@@ -183,6 +183,7 @@ import dotenv from "dotenv";
 dotenv.config();
 
 import logger from "./logger";
+
 async function bootstrap(){
     logger.debug("kaizoku oni ore wa naru");
 }
@@ -202,4 +203,17 @@ A través del nuevo archivo `.gitignore` excluiremos todos los archivos y carpet
 node_modules/
 dist/
 .env
+```
+
+Para subir los cambios al nuevo repositorio, primero nos aseguramos de que estamos en la rama `main`. Si lo estamos perfecto, si estamos en la rama `master` tenemos que ejecutar el comando:
+```sh
+git checkout -B main
+```
+
+Stageamos todos los cambios, ponemos el mensaje initial project y creamos el primer commit. 
+Sincroniza los cambios para realizar un push y pull.
+
+Por último, sube los campos al nuevo repositorio con el comando:
+```sh
+git push --set-upstream origin main
 ```
