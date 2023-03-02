@@ -126,7 +126,7 @@ Para poder usar la configuración a través de las variables de entorno en un fi
 npm i dotenv@latest
 ```
 
-Creamos el archivo de configuración `.env` en el root y otro también en el root llamado `.env-example` que contendrá las mismas variables de entorno que el `.env` pero con las variables no seguras (contraseñas, tokens...) sin valor. De esta manera, en el archivo `.gitignore` se ignorará el `.env` pero quien coja el proyecto sabrá a través del `.env-example` que necesita de esas variables para funcionar.
+Creamos los archivos de configuración `.env` y `.env-example` en el root donde ambos contendrán las mismas variables de entorno, pero en el de `.env-example` las variables no seguras (contraseñas, tokens...) estarán sin valor. De esta manera, el archivo `.gitignore` ignorará por seguridad el `.env` de variables delicadas, pero no el `.env-example` por el cual quien trabaje con el proyecto podrá ver las variables que necesita para funcionar.
 
 En ambos archivos `.env` y `.env-example` escribimos:
 ```sh
