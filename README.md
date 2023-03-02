@@ -20,8 +20,8 @@ git clone https://github.com/aliciacalafat/base-typescript-node.git
 code .\base-typescript-node\
 ```
 
-## 4.- Inicializar un proyecto de Node.js
-Para ello debemos ejecutar el comando:
+## 4.- Inicializar un proyecto de node.js
+Para inicializar node.js debemos ejecutar el comando:
 ```sh
 npm init -y
 ```
@@ -35,7 +35,7 @@ npm i -D typescript@latest ts-node@latest
 Se creará el archivo `package-lock.json` y la carpeta `node_modules`
 
 ## 6.- Inicializar el fichero de configuración.
-Para ello:
+Para inicializar el fichero de configuración:
 ```sh
 npx tsc --init
 ```
@@ -54,7 +54,7 @@ Se creará el archivo `tsconfig.json` con los valores por defecto. Para seguir u
 De esta forma, por un lado especificamos la carpeta root de nuestros archivos (`./src`) y por otro especificamos la carpeta output donde se irán todos los archivos que se vayan creando (`./dist`).
 
 ## 7.- Fichero de entrada.
-Tal y como hemos especificado en el paso anterior, nuestro código principal estará dentro de la carpeta `src`. Por lo tanto nada más empezar, crea la carpeta `src` en el root y dentro deberemos crear el fichero principal `index.ts` con el siguiente contenido:
+Tal y como hemos comentado en el paso anterior, nuestro código principal estará dentro de la carpeta `src`. Por lo tanto nada más empezar, crea la carpeta `src` en el root y dentro deberemos crear el fichero principal `index.ts` con el siguiente contenido:
 ```sh
 async function bootstrap(){
       console.log("kaizoku oni ore wa naru");
@@ -192,7 +192,7 @@ bootstrap();
 ```
 
 **Nota**: Es importante poner el `import logger` después del `dotenv.config()`, de lo contrario no verás nada en la terminal.
-Tras compilar el código con un npm run dev, verás algo parecido a:
+Tras compilar el código con un `npm run dev`, verás algo parecido a:
 ```sh
 [23:08:20.199] DEBUG (6964): kaizoku oni ore wa naru
 ```
