@@ -192,6 +192,7 @@ bootstrap();
 ```
 
 **Nota**: Es importante poner el `import logger` después del `dotenv.config()`, de lo contrario no verás nada en la terminal.
+
 Tras compilar el código con un `npm run dev`, verás algo parecido a:
 ```sh
 [23:08:20.199] DEBUG (6964): kaizoku oni ore wa naru
