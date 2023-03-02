@@ -41,14 +41,14 @@ npx tsc --init
 ```
 Se creará el archivo `tsconfig.json` con los valores por defecto. Para seguir una misma plantilla siempre, podemos modificarlo con los siguientes valores:
 ```sh
-"compilerOptions": {
-...
-"rootDir":"./src",
-...,
-"outDir":"./dist",
-...
-},
-...
+{
+      "compilerOptions": {
+      ...
+      "rootDir":"./src",
+      ...,
+      "outDir":"./dist",
+      ...
+      }
 }
 ```
 De esta forma, por un lado especificamos la carpeta root de nuestros archivos (`./src`) y por otro especificamos la carpeta output donde se irán todos los archivos que se vayan creando (`./dist`).
@@ -57,8 +57,9 @@ De esta forma, por un lado especificamos la carpeta root de nuestros archivos (`
 Tal y como hemos especificado en el paso anterior, nuestro código principal estará dentro de la carpeta `src`. Por lo tanto nada más empezar, crea la carpeta `src` en el root y dentro deberemos crear el fichero principal `index.ts` con el siguiente contenido:
 ```sh
 async function bootstrap(){
-      console.log('kaizoku oni ore wa naru');
+      console.log("kaizoku oni ore wa naru");
 }
+
 bootstrap();
 ```
 
@@ -66,15 +67,15 @@ bootstrap();
 Modificamos el archivo `package.json` para incluir el nombre del autor, en el `main` deberemos indicar la carpeta `dist` y para ejecutar el código deberemos añadir lo siguiente a `scripts`:
 ```sh
 {
-  "name": "@alicia/base-typescript-node",
-  ...
-  "main": "dist/index.js",
-  ...
-  "scripts": {
-    ...
-    "dev": "ts-node ./src/index.ts"
-  },
-  ...
+      "name": "@alicia/base-typescript-node",
+      ...
+      "main": "dist/index.js",
+      ...
+      "scripts": {
+            ...
+            "dev": "ts-node ./src/index.ts"
+      },
+      ...
 }
 ```
 Con ese nuevo script podremos ejecutar el código con un `npm run dev`.
@@ -99,7 +100,7 @@ Para debugar creamos en el root la carpeta `.vscode` y en su interior creamos el
 ```
 Aahora con un `F5` podremos arrancar el debugger. Poniendo un breakpoint en el `console.log()` debería parar allí.
 
-## 10.- Copmilación del código.
+## 10.- Compilación del código.
 Para compilar necesitamos instalar el paquete:
 ```sh
 npm i -D rimraf@latest
@@ -134,15 +135,71 @@ NODE_ENV=development
 
 Para que las variables de entorno se carguen debemos incorporar en el archivo `index.ts` el `import dotenv` y el `dotenv.config()`, de manera que el `index.ts` quede: 
 ```sh
-import dotenv from 'dotenv';
+import dotenv from "dotenv";
 
 dotenv.config();
 
 async function bootstrap(){
-    console.log('kaizoku oni ore wa naru');
+    console.log("kaizoku oni ore wa naru");
 }
 
 bootstrap();
 ```
 
 ## 12.- Gestión de logs.
+Para gestionar los logs que nos indican lo que está ocurriendo, instalaremos las librerías:
+```sh
+npm install pino
+```
+```sh
+npm i -D pino-pretty
+```
+
+Añadimos en el archivo `.env` y en el `.env-example` la variable de entorno:
+```sh
+LOGGER_LEVEL=debug
+```
+
+Creamos un nuevo archivo en la carpeta `src` llamado `logger.ts` con el contenido:
+```sh
+import pino from "pino";
+
+const isProduction = process.env.NODE_ENV === "production";
+
+const logger = pino({
+    level: process.env.LOGGER_LEVEL ?? "info",
+    transport:{
+        target: isProduction ? "pino" : "pino-pretty",
+    }
+});
+
+export default logger;
+```
+
+Para confirmar que todo funciona correctamente, sustitumos en el archivo `index.ts` el `console.log()` por el siguiente log de pino:
+```sh
+import dotenv from "dotenv";
+
+dotenv.config();
+
+import logger from "./logger";
+async function bootstrap(){
+    logger.debug("kaizoku oni ore wa naru");
+}
+
+bootstrap();
+```
+
+**Nota**: Es importante poner el `import logger` después del `dotenv.config()`, de lo contrario no verás nada en la terminal.
+Tras compilar el código con un npm run dev, verás algo parecido a:
+```sh
+[23:08:20.199] DEBUG (6964): kaizoku oni ore wa naru
+```
+
+## 13.- Integración con Git.
+A través del nuevo archivo `.gitignore` excluiremos todos los archivos y carpetas que no queremos que se suban al repositorio, como el `.env` y las carpetas `node_modules` y `dist`. Para ello creamos en el root el archivo `.gitignore` y escribimos:
+```sh
+node_modules/
+dist/
+.env
+```
