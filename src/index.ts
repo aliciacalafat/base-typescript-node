@@ -7,4 +7,6 @@ async function bootstrap(){
     logger.debug("kaizoku oni ore wa naru");
 }
 
+console.log("test");
+
 bootstrap();
